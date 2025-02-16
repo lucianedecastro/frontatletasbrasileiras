@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Repositório da Mulher Brasileira no Esporte</title>
+  <link rel="stylesheet" href="css/public.css"> 
+  <script>
+    const API_URL = "http://localhost:3001";
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Repositório da Mulher Brasileira no Esporte</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Atletas</a></li>
+        <li><a href="#">Modalidades</a></li>
+        <li><a href="#">Competições</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="filtros">
+      <h2>Filtros</h2>
+      <label for="modalidade">Modalidade:</label>
+      <select id="modalidade">
+        <option value="">Todas</option>
+        <!-- As opções de modalidade serão inseridas aqui pelo JavaScript -->
+      </select>
+    </section>
+
+    <section id="atletas-container">
+      <h2>Atletas</h2>
+      <div id="atletas-lista">
+        <!-- As atletas serão inseridas aqui pelo JavaScript -->
+      </div>
+    </section>
+
+    <section id="paginacao">
+      <!-- A paginação será inserida aqui pelo JavaScript -->
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Repositório da Mulher Brasileira no Esporte</p>
+    <p>Todos os direitos reservados</p>
+  </footer>
+
+  <script src="js/public.js"></script> <!-- Alterado para public.js -->
+</body>
+</html>

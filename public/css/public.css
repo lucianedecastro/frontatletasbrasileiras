@@ -1,0 +1,236 @@
+/* Reset de Estilos */
+body, h1, h2, h3, p, ul, li, form, input, select, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box; /* Garante que padding e borda não aumentem o tamanho */
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #EFF396; /* Amarelo claro para o fundo */
+    line-height: 1;
+}
+
+/* Estilos Gerais */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff; /* Branco para o conteúdo */
+    border: 2px solid #211C6A; /* Borda azul escura */
+}
+
+/* Cabeçalho */
+header {
+    background-color: #211C6A; /* Azul escuro */
+    color: #EFF396; /* Amarelo claro */
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #74E291; /* Borda verde */
+}
+
+header h1 {
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #EFF396;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #74E291; /* Borda verde */
+    background-color: #59B4C3; /* Azul médio */
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #74E291; /* Verde */
+    color: #211C6A;
+}
+
+/* Filtros */
+#filtros {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #59B4C3; /* Borda azul médio */
+}
+
+#filtros label {
+    display: block;
+    margin-bottom: 5px;
+    color: #211C6A;
+}
+
+#filtros select {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #59B4C3;
+    background-color: #EFF396; /* Amarelo claro */
+}
+
+/* Container de Atletas */
+#atletas-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#atletas-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.atleta-card {
+    background-color: #fff;
+    border: 2px solid #74E291; /* Borda verde */
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.atleta-card:hover {
+    transform: scale(1.05);
+}
+
+.atleta-card h3 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: #211C6A;
+}
+
+.atleta-card p {
+    color: #59B4C3;
+    margin-bottom: 10px;
+}
+
+.atleta-card a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 15px;
+    background-color: #211C6A; /* Azul escuro */
+    border: 1px solid #74E291;
+    transition: background-color 0.3s;
+}
+
+.atleta-card a:hover {
+    background-color: #74E291; /* Verde */
+    color: #211C6A;
+}
+
+/* Paginação */
+#paginacao {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#paginacao button {
+    padding: 8px 15px;
+    margin: 5px;
+    border: 2px solid #59B4C3; /* Borda azul médio */
+    background-color: #EFF396; /* Amarelo claro */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#paginacao button:hover {
+    background-color: #59B4C3; /* Azul médio */
+    color: #fff;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #211C6A; /* Azul escuro */
+    color: #EFF396; /* Amarelo claro */
+    border-top: 2px solid #74E291;
+    padding: 15px; /* Adiciona padding ao rodapé */
+}
+
+footer p {
+  font-size: 0.9em;
+}
+
+/* Página Sobre */
+#sobre-projeto {
+    text-align: center; /* Alinha o título ao centro */
+    margin-bottom: 30px; /* Adiciona um espaço abaixo do título */
+    width: 80%; /* Defina a largura da seção */
+    margin-left: auto; /* Centraliza a seção */
+    margin-right: auto; /* Centraliza a seção */
+}
+
+#sobre-projeto h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #211C6A;
+}
+
+/* Estilos para as seções */
+#nossa-missao,
+#equipe,
+#contribuir {
+    margin-bottom: 30px;
+    padding: 20px; /* Adiciona padding às seções */
+}
+
+/* Removido o fundo branco da seção "Sobre" */
+
+#nossa-missao h2,
+#equipe h2,
+#contribuir h2 {
+    font-size: 1.8em; /* Aumenta o tamanho dos títulos */
+    margin-bottom: 15px; /* Aumenta o espaçamento abaixo dos títulos */
+    color: #211C6A;
+    text-align: center; /* Alinha o texto no centro */
+}
+
+#nossa-missao p,
+#equipe p,
+#contribuir p {
+    text-align: justify;
+    width: 80%; /* Defina a largura do texto */
+    margin-left: auto; /* Centraliza o texto */
+    margin-right: auto; /* Centraliza o texto */
+    font-size: 1.1em; /* Aumenta o tamanho da fonte */
+    line-height: 1.6; /* Aumenta o espaçamento entre linhas */
+    color: #333; /* Define a cor do texto */
+}
+
+#nossa-missao ul,
+#equipe ul,
+#contribuir ul {
+    list-style-type: disc;
+    margin-left: auto; /* Remove a margem esquerda */
+    margin-right: auto; /* Remove a margem direita */
+    width: 80%; /* Define a largura da lista */
+    text-align: left; /* Alinha os itens da lista à esquerda */
+}
+
+#nossa-missao li,
+#equipe li,
+#contribuir li {
+    margin-bottom: 8px; /* Aumenta o espaçamento entre os itens da lista */
+    font-size: 1.1em; /* Aumenta o tamanho da fonte */
+}
