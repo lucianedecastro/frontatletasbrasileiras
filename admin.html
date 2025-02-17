@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+    <link rel="stylesheet" href="css/public.css">
+    
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Atletas</a></li>
+                <li><a href="#">Modalidades</a></li>
+                <li><a href="#">Competições</a></li>
+                <li><a href="#">Linha do Tempo</a></li>
+            </ul>
+        </nav>
+        <main>
+            <h1>Atletas</h1>
+            <button id="adicionarAtleta">Adicionar Atleta</button>
+            <table id="tabela-atletas">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Modalidade</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- As linhas da tabela serão inseridas aqui pelo JavaScript -->
+                </tbody>
+            </table>
+
+            <!-- Formulário de edição -->
+            <div id="formulario-edicao" style="display: none;">
+                <h2>Editar Atleta</h2>
+                <form id="editar-atleta-form">
+                    <label for="nome_completo">Nome Completo:</label>
+                    <input type="text" id="nome_completo" name="nome_completo" required><br><br>
+
+                    <label for="data_nascimento">Data de Nascimento:</label>
+                    <input type="date" id="data_nascimento" name="data_nascimento"><br><br>
+
+                    <label for="modalidade_id">Modalidade Esportiva:</label>
+                    <select id="modalidade_id" name="modalidade_id" required>
+                        <option value="" selected disabled>Selecione a Modalidade</option>
+                        <!-- As opções de modalidade serão inseridas aqui pelo JavaScript -->
+                    </select>
+                    
+                    <label for="principais_conquistas">Principais Conquistas:</label>
+                    <textarea id="principais_conquistas" name="principais_conquistas"></textarea><br><br>
+
+                    <label for="fonte_informacao">Fonte da Informação:</label>
+                    <input type="text" id="fonte_informacao" name="fonte_informacao" required><br><br>
+
+                    <label for="outras_informacoes">Outras Informações:</label>
+                    <textarea id="outras_informacoes" name="outras_informacoes"></textarea><br><br>
+
+                    <button type="submit">Salvar</button>
+                    <button type="button" id="cancelar-edicao">Cancelar</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

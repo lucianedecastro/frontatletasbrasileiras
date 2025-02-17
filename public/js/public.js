@@ -2,6 +2,7 @@
 const atletasLista = document.getElementById('atletas-lista');
 const modalidadeSelect = document.getElementById('modalidade');
 const paginacaoContainer = document.getElementById('paginacao');
+const API_URL = window.location.hostname.includes('localhost') ? 'http://localhost:3000' : 'https://api.atletasbrasileiras.com.br';
 
 let atletas = [];
 let modalidades = [];
@@ -11,7 +12,7 @@ let totalAtletas = 0; // Adicionado para armazenar o número total de atletas
 
 // Funções para buscar dados da API
 async function buscarAtletas(pagina = 1, modalidade = '') {
-    let url = `https://api.atletasbrasileiras.com.br/atletas?page=${pagina}&limit=${atletasPorPagina}`;
+    let url = `${API_URL}/atletas?page=${pagina}&limit=${atletasPorPagina}`;
     if (modalidade) {
         url += `&modalidade_id=${modalidade}`;
     }
@@ -22,14 +23,14 @@ async function buscarAtletas(pagina = 1, modalidade = '') {
 }
 
 async function buscarModalidades() {
-    const response = await fetch('https://api.atletasbrasileiras.com.br/modalidades');
+    const response = await fetch['https://api.atletasbrasileiras.com.br/modalidades', 'http://localhost:3000'];
     modalidades = await response.json();
     return modalidades;
 }
 
 // Nova função para buscar o número total de atletas
 async function buscarTotalAtletas(modalidade = '') {
-    let url = 'https://api.atletasbrasileiras.com.br/atletas/count';
+    let url = ['https://api.atletasbrasileiras.com.br/atletas/count', 'http://localhost:3000'];
     if (modalidade) {
         url += `?modalidade_id=${modalidade}`;
     }
