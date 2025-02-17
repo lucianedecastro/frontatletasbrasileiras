@@ -1,8 +1,9 @@
 // Variáveis Globais
+const API_URL = window.location.hostname.includes('localhost') ? 'http://localhost:3000' : 'https://api.atletasbrasileiras.com.br';
+
 const atletasLista = document.getElementById('atletas-lista');
 const modalidadeSelect = document.getElementById('modalidade');
 const paginacaoContainer = document.getElementById('paginacao');
-const API_URL = window.location.hostname.includes('localhost') ? 'http://localhost:3000' : 'https://api.atletasbrasileiras.com.br';
 
 let atletas = [];
 let modalidades = [];
@@ -17,28 +18,61 @@ async function buscarAtletas(pagina = 1, modalidade = '') {
         url += `&modalidade_id=${modalidade}`;
     }
 
-    const response = await fetch(url);
-    atletas = await response.json();
-    return atletas;
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            console.error("Erro ao buscar atletas:", response.status, response.statusText);
+            return []; // Retorna um array vazio para evitar erros
+        }
+
+        const atletas = await response.json();
+        return atletas;
+    } catch (error) {
+        console.error("Erro na requisição buscarAtletas:", error);
+        return [];
+    }
 }
 
 async function buscarModalidades() {
-    const response = await fetch['https://api.atletasbrasileiras.com.br/modalidades', 'http://localhost:3000'];
-    modalidades = await response.json();
-    return modalidades;
+    try {
+        const response = await fetch(`${API_URL}/modalidades`);
+
+        if (!response.ok) {
+            console.error("Erro ao buscar modalidades:", response.status, response.statusText);
+            return []; // Retorna um array vazio para evitar erros
+        }
+
+        const modalidades = await response.json();
+        return modalidades;
+    } catch (error) {
+        console.error("Erro na requisição buscarModalidades:", error);
+        return [];
+    }
 }
 
 // Nova função para buscar o número total de atletas
 async function buscarTotalAtletas(modalidade = '') {
-    let url = ['https://api.atletasbrasileiras.com.br/atletas/count', 'http://localhost:3000'];
+    let url = `${API_URL}/atletas/count`;
     if (modalidade) {
         url += `?modalidade_id=${modalidade}`;
     }
 
-    const response = await fetch(url);
-    const data = await response.json();
-    totalAtletas = data.total; // Atualiza a variável global
-    return totalAtletas;
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            console.error("Erro ao buscar total de atletas:", response.status, response.statusText);
+            return 0; // Retorna 0 para evitar erros
+        }
+
+        const data = await response.json();
+        totalAtletas = data.total; // Atualiza a variável global
+        return totalAtletas;
+    } catch (error) {
+        console.error("Erro na requisição buscarTotalAtletas:", error);
+        return 0;
+    }
 }
 
 // Funções para exibir os dados no HTML

@@ -60,7 +60,7 @@ tabelaAtletas.addEventListener('click', async (event) => {
         if (confirmacao) {
             try {
                 const token = localStorage.getItem('token');
-                const response = await fetch(`http://localhost:3000/admin/atletas/${id}`, {
+                const response = await fetch(`${API_URL}/admin/atletas/${id}`, {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -96,7 +96,7 @@ editarAtletaForm.addEventListener('submit', async (event) => {
         const token = localStorage.getItem('token');
         let response;
         if (atletaEmEdicao) { // Se estiver editando
-            response = await fetch(`http://localhost:3000/admin/atletas/${atletaEmEdicao}`, {
+            response = await fetch(`${API_URL}/admin/atletas/${atletaEmEdicao}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ editarAtletaForm.addEventListener('submit', async (event) => {
                 body: JSON.stringify({ nome_completo, data_nascimento, modalidade_id, principais_conquistas, fonte_informacao, outras_informacoes })
             });
         } else { // Se estiver criando
-            response = await fetch(`http://localhost:3000/admin/atletas`, {
+            response = await fetch(`${API_URL}/admin/atletas`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -163,7 +163,7 @@ async function buscarAtletas() {
         }
 
         // Fazer a requisição para a rota /admin/atletas
-        const response = await fetch('http://localhost:3000/admin/atletas', {
+        const response = await fetch(`${API_URL}/admin/atletas`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -207,7 +207,7 @@ function exibirAtletas(atletas) {
 async function buscarModalidades() {
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:3000/admin/modalidades', {
+        const response = await fetch(`${API_URL}/admin/modalidades`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
