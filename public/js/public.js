@@ -1,4 +1,6 @@
-const API_URL = window.location.hostname.includes('localhost') ? 'http://localhost:3000' : 'https://api.atletasbrasileiras.com.br';
+const API_URL = window.location.hostname === 'localhost' 
+    ? `${window.location.protocol}//${window.location.hostname}:3000`
+    : 'https://api.atletasbrasileiras.com.br';
 
 const atletasLista = document.getElementById('atletas-lista');
 const modalidadeSelect = document.getElementById('modalidade');
