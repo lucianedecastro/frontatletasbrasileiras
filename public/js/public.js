@@ -17,16 +17,14 @@ async function buscarAtletas(pagina = 1, modalidade = '') {
     if (modalidade) {
         url += `&modalidade_id=${modalidade}`;
     }
+    console.log("URL da requisição:", url);
+
 
     try {
         const response = await fetch(url);
-
-        if (!response.ok) {
-            console.error("Erro ao buscar atletas:", response.status, response.statusText);
-            return []; // Retorna um array vazio para evitar erros
-        }
-
+        console.log("Resposta da API:", response);
         const atletas = await response.json();
+        console.log("Dados retornados:", atletas);
         return atletas;
     } catch (error) {
         console.error("Erro na requisição buscarAtletas:", error);
