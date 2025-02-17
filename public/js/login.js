@@ -10,25 +10,28 @@ formLogin.addEventListener('submit', async (event) => {
     const senha = document.getElementById('senha').value;
 
     try {
-        const response = await fetch(`${API_URL}/auth/login`, {
+        const response = await fetch(`${API_URL}/api/auth/login`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, senha })
         });
 
         const data = await response.json();
 
-        if (response.ok) {
+        if (response.ok && data.token) {
             localStorage.setItem('token', data.token);
             mensagem.textContent = 'Login realizado com sucesso!';
-            window.location.href = 'admin.html'; // Redireciona para o painel administrativo
+            mensagem.style.color = 'green';
+            setTimeout(() => {
+                window.location.href = 'admin.html';
+            }, 1000);
         } else {
-            mensagem.textContent = 'Erro ao fazer login: ' + data.message;
+            mensagem.textContent = 'Erro ao fazer login: ' + (data.message || 'Verifique suas credenciais');
+            mensagem.style.color = 'red';
         }
     } catch (error) {
         console.error('Erro:', error);
-        mensagem.textContent = 'Erro ao fazer login: ' + error;
+        mensagem.textContent = 'Erro ao fazer login. Tente novamente mais tarde.';
+        mensagem.style.color = 'red';
     }
 });

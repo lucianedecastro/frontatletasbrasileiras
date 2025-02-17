@@ -1,34 +1,21 @@
-// Variáveis Globais
 const API_URL = window.location.hostname.includes('localhost') ? 'http://localhost:3000' : 'https://api.atletasbrasileiras.com.br';
 
 const atletasLista = document.getElementById('atletas-lista');
 const modalidadeSelect = document.getElementById('modalidade');
 const paginacaoContainer = document.getElementById('paginacao');
 
-let atletas = [];
-let modalidades = [];
 let paginaAtual = 1;
 let atletasPorPagina = 30;
-let totalAtletas = 0; // Armazena o número total de atletas
+let totalAtletas = 0;
 
-// Funções para buscar dados da API
 async function buscarAtletas(pagina = 1, modalidade = '') {
-    let url = `${API_URL}/atletas?page=${pagina}&limit=${atletasPorPagina}`;
-    if (modalidade) {
-        url += `&modalidade_id=${modalidade}`;
-    }
+    let url = `${API_URL}/api/atletas?page=${pagina}&limit=${atletasPorPagina}`;
+    if (modalidade) url += `&modalidade_id=${modalidade}`;
 
     try {
-        console.log("Buscando atletas em:", url);
         const response = await fetch(url);
-
-        if (!response.ok) {
-            throw new Error(`Erro ao buscar atletas: ${response.status} - ${response.statusText}`);
-        }
-
-        const atletas = await response.json();
-        console.log("Atletas recebidos:", atletas);
-        return atletas;
+        if (!response.ok) throw new Error(`Erro ao buscar atletas: ${response.statusText}`);
+        return await response.json();
     } catch (error) {
         console.error("Erro na requisição buscarAtletas:", error);
         return [];
@@ -37,39 +24,24 @@ async function buscarAtletas(pagina = 1, modalidade = '') {
 
 async function buscarModalidades() {
     try {
-        console.log("Buscando modalidades em:", `${API_URL}/modalidades`);
-        const response = await fetch(`${API_URL}/modalidades`);
-
-        if (!response.ok) {
-            throw new Error(`Erro na requisição: ${response.status} - ${response.statusText}`);
-        }
-
-        const modalidades = await response.json();
-        console.log("Modalidades recebidas:", modalidades);
-        return modalidades;
+        const response = await fetch(`${API_URL}/api/modalidades`);
+        if (!response.ok) throw new Error(`Erro ao buscar modalidades: ${response.statusText}`);
+        return await response.json();
     } catch (error) {
         console.error("Erro na requisição buscarModalidades:", error);
         return [];
     }
 }
 
-// Nova função para buscar o número total de atletas
 async function buscarTotalAtletas(modalidade = '') {
-    let url = `${API_URL}/atletas/count`;
-    if (modalidade) {
-        url += `?modalidade_id=${modalidade}`;
-    }
+    let url = `${API_URL}/api/atletas/count`;
+    if (modalidade) url += `?modalidade_id=${modalidade}`;
 
     try {
-        console.log("Buscando total de atletas em:", url);
         const response = await fetch(url);
-
-        if (!response.ok) {
-            throw new Error(`Erro ao buscar total de atletas: ${response.status} - ${response.statusText}`);
-        }
-
+        if (!response.ok) throw new Error(`Erro ao buscar total de atletas: ${response.statusText}`);
         const data = await response.json();
-        totalAtletas = data.total; // Atualiza a variável global
+        totalAtletas = data.total;
         return totalAtletas;
     } catch (error) {
         console.error("Erro na requisição buscarTotalAtletas:", error);
@@ -77,35 +49,22 @@ async function buscarTotalAtletas(modalidade = '') {
     }
 }
 
-// Funções para exibir os dados no HTML
 function exibirAtletas(atletas) {
-    atletasLista.innerHTML = ''; // Limpa a lista
-
+    atletasLista.innerHTML = '';
     atletas.forEach(atleta => {
         const atletaCard = document.createElement('div');
         atletaCard.classList.add('atleta-card');
-
-        const nomeElement = document.createElement('h3');
-        nomeElement.textContent = atleta.nome_completo;
-
-        const modalidadeElement = document.createElement('p');
-        modalidadeElement.textContent = `Modalidade: ${atleta.modalidade_nome}`;
-
-        const linkElement = document.createElement('a');
-        linkElement.href = `atleta.html?id=${atleta.id}`;
-        linkElement.textContent = 'Ver Detalhes';
-
-        atletaCard.appendChild(nomeElement);
-        atletaCard.appendChild(modalidadeElement);
-        atletaCard.appendChild(linkElement);
-
+        atletaCard.innerHTML = `
+            <h3>${atleta.nome_completo}</h3>
+            <p>Modalidade: ${atleta.modalidade_nome || 'Não informada'}</p>
+            <a href="atleta.html?id=${atleta.id}">Ver Detalhes</a>
+        `;
         atletasLista.appendChild(atletaCard);
     });
 }
 
 function exibirModalidades(modalidades) {
-    modalidadeSelect.innerHTML = '<option value="">Todas</option>'; // Limpa o select
-
+    modalidadeSelect.innerHTML = '<option value="">Todas</option>';
     modalidades.forEach(modalidade => {
         const option = document.createElement('option');
         option.value = modalidade.id;
@@ -116,20 +75,18 @@ function exibirModalidades(modalidades) {
 
 function exibirPaginacao() {
     const totalPaginas = Math.ceil(totalAtletas / atletasPorPagina);
-    paginacaoContainer.innerHTML = ''; // Limpa a paginação
-
+    paginacaoContainer.innerHTML = '';
     for (let i = 1; i <= totalPaginas; i++) {
         const button = document.createElement('button');
         button.textContent = i;
         button.addEventListener('click', () => {
             paginaAtual = i;
-            carregarAtletas(); // Carrega as atletas da nova página
+            carregarAtletas();
         });
         paginacaoContainer.appendChild(button);
     }
 }
 
-// Funções para carregar os dados e atualizar a página
 async function carregarAtletas() {
     const atletas = await buscarAtletas(paginaAtual, modalidadeSelect.value);
     exibirAtletas(atletas);
@@ -140,26 +97,20 @@ async function carregarModalidades() {
     exibirModalidades(modalidades);
 }
 
-// Função para inicializar a página
-async function init() {
-    await carregarModalidades();
-    await carregarTotalAtletas(); // Carrega o número total de atletas
-    await carregarAtletas(); // Carrega as atletas da primeira página
-    exibirPaginacao(); // Exibe a paginação
-}
-
-// Nova função para carregar o número total de atletas
 async function carregarTotalAtletas() {
     await buscarTotalAtletas(modalidadeSelect.value);
 }
 
-// Event Listeners
-modalidadeSelect.addEventListener('change', () => {
-    paginaAtual = 1; // Reseta para a primeira página ao mudar a modalidade
-    carregarTotalAtletas(); // Recarrega o número total de atletas
-    carregarAtletas(); // Carrega as atletas da nova página
-    exibirPaginacao(); // Exibe a paginação
+document.addEventListener('DOMContentLoaded', async () => {
+    await carregarModalidades();
+    await carregarTotalAtletas();
+    await carregarAtletas();
+    exibirPaginacao();
 });
 
-// Inicialização
-document.addEventListener('DOMContentLoaded', init);
+modalidadeSelect.addEventListener('change', async () => {
+    paginaAtual = 1;
+    await carregarTotalAtletas();
+    await carregarAtletas();
+    exibirPaginacao();
+});
