@@ -9,7 +9,7 @@ let atletas = [];
 let modalidades = [];
 let paginaAtual = 1;
 let atletasPorPagina = 30;
-let totalAtletas = 0; // Adicionado para armazenar o número total de atletas
+let totalAtletas = 0; // Armazena o número total de atletas
 
 // Funções para buscar dados da API
 async function buscarAtletas(pagina = 1, modalidade = '') {
@@ -17,14 +17,17 @@ async function buscarAtletas(pagina = 1, modalidade = '') {
     if (modalidade) {
         url += `&modalidade_id=${modalidade}`;
     }
-    console.log("URL da requisição:", url);
-
 
     try {
+        console.log("Buscando atletas em:", url);
         const response = await fetch(url);
-        console.log("Resposta da API:", response);
+
+        if (!response.ok) {
+            throw new Error(`Erro ao buscar atletas: ${response.status} - ${response.statusText}`);
+        }
+
         const atletas = await response.json();
-        console.log("Dados retornados:", atletas);
+        console.log("Atletas recebidos:", atletas);
         return atletas;
     } catch (error) {
         console.error("Erro na requisição buscarAtletas:", error);
@@ -34,14 +37,15 @@ async function buscarAtletas(pagina = 1, modalidade = '') {
 
 async function buscarModalidades() {
     try {
+        console.log("Buscando modalidades em:", `${API_URL}/modalidades`);
         const response = await fetch(`${API_URL}/modalidades`);
 
         if (!response.ok) {
-            console.error("Erro ao buscar modalidades:", response.status, response.statusText);
-            return []; // Retorna um array vazio para evitar erros
+            throw new Error(`Erro na requisição: ${response.status} - ${response.statusText}`);
         }
 
         const modalidades = await response.json();
+        console.log("Modalidades recebidas:", modalidades);
         return modalidades;
     } catch (error) {
         console.error("Erro na requisição buscarModalidades:", error);
@@ -57,11 +61,11 @@ async function buscarTotalAtletas(modalidade = '') {
     }
 
     try {
+        console.log("Buscando total de atletas em:", url);
         const response = await fetch(url);
 
         if (!response.ok) {
-            console.error("Erro ao buscar total de atletas:", response.status, response.statusText);
-            return 0; // Retorna 0 para evitar erros
+            throw new Error(`Erro ao buscar total de atletas: ${response.status} - ${response.statusText}`);
         }
 
         const data = await response.json();
@@ -88,7 +92,7 @@ function exibirAtletas(atletas) {
         modalidadeElement.textContent = `Modalidade: ${atleta.modalidade_nome}`;
 
         const linkElement = document.createElement('a');
-        linkElement.href = `atleta.html?id=${atleta.id}`; // TODO: Criar página de detalhes
+        linkElement.href = `atleta.html?id=${atleta.id}`;
         linkElement.textContent = 'Ver Detalhes';
 
         atletaCard.appendChild(nomeElement);
