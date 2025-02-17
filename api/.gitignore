@@ -1,0 +1,17 @@
+# Arquivos do Node.js
+node_modules/
+package-lock.json
+*package*.json
+
+# Arquivos de configuração
+.env
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de log
+*.log
+
+
+.vercel

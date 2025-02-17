@@ -1,4 +1,5 @@
-const API_URL = window.location.hostname.includes('localhost') ? 'http://localhost:3000' : 'https://api.atletasbrasileiras.com.br';
+//const API_URL = window.location.hostname.includes('localhost') ? 'http://localhost:3000' : 'https://api.atletasbrasileiras.com.br';
+const API_URL = '/api'; // Use sempre o caminho relativo
 
 // Função para obter o ID da atleta da URL
 function getAtletaId() {
@@ -9,7 +10,7 @@ function getAtletaId() {
 // Função para buscar os dados da atleta da API
 async function buscarAtleta(id) {
     try {
-        const response = await fetch(`${API_URL}/api/atletas/${id}`);
+        const response = await fetch(`${API_URL}/atletas/${id}`);
         if (!response.ok) throw new Error('Atleta não encontrada.');
         return await response.json();
     } catch (error) {

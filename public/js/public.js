@@ -1,6 +1,4 @@
-const API_URL = window.location.hostname === 'localhost' 
-    ? `${window.location.protocol}//${window.location.hostname}:3000`
-    : 'https://api.atletasbrasileiras.com.br';
+const API_URL = '/api'; // Use sempre o caminho relativo
 
 const atletasLista = document.getElementById('atletas-lista');
 const modalidadeSelect = document.getElementById('modalidade');
@@ -11,7 +9,7 @@ let atletasPorPagina = 30;
 let totalAtletas = 0;
 
 async function buscarAtletas(pagina = 1, modalidade = '') {
-    let url = `${API_URL}/api/atletas?page=${pagina}&limit=${atletasPorPagina}`;
+    let url = `${API_URL}/atletas?page=${pagina}&limit=${atletasPorPagina}`;
     if (modalidade) url += `&modalidade_id=${modalidade}`;
 
     try {
@@ -26,7 +24,7 @@ async function buscarAtletas(pagina = 1, modalidade = '') {
 
 async function buscarModalidades() {
     try {
-        const response = await fetch(`${API_URL}/api/modalidades`);
+        const response = await fetch(`${API_URL}/modalidades`);
         if (!response.ok) throw new Error(`Erro ao buscar modalidades: ${response.statusText}`);
         return await response.json();
     } catch (error) {
@@ -36,7 +34,7 @@ async function buscarModalidades() {
 }
 
 async function buscarTotalAtletas(modalidade = '') {
-    let url = `${API_URL}/api/atletas/count`;
+    let url = `${API_URL}/atletas/count`;
     if (modalidade) url += `?modalidade_id=${modalidade}`;
 
     try {

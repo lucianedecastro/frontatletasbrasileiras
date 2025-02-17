@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para buscar as atletas da API
     async function buscarAtletas() {
         try {
-            const response = await fetch('https://www.atletasbrasileiras.com.br/atletas', {  // Use o domínio real!
+            const response = await fetch('/api/atletas', {  // Use o caminho relativo
                 headers: {
                     'Authorization': `Bearer ${token}` // Envia o token no header
                 }
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Função para buscar as modalidades da API e popular o select
   async function buscarModalidades() {
     try {
-      const response = await fetch('URL_DA_SUA_API_DE_MODALIDADES', { // Substitua pela URL correta
+      const response = await fetch('/api/modalidades', { // Substitua pela URL correta
         headers: {
           'Authorization': `Bearer ${token}` // Envia o token no header
         }
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const response = await fetch(`https://www.atletasbrasileiras.com.br/atletas/${atletaEmEdicao.id}`, { // Use o domínio real!
+            const response = await fetch(`/api/atletas/${atletaEmEdicao.id}`, { // Use o caminho relativo
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (confirm('Tem certeza que deseja excluir esta atleta?')) {
             try {
-                const response = await fetch(`https://www.atletasbrasileiras.com.br/atletas/${atletaId}`, { // Use o domínio real!
+                const response = await fetch(`/api/atletas/${atletaId}`, { // Use o caminho relativo
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${token}`
