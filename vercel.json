@@ -1,8 +1,5 @@
 {
     "rewrites": [
-    {
-    "source": "/atleta/:id",
-    "destination": "/atleta.html"
-    }
+        { "source": "/api/(.*)", "destination": "/api/index.js" }
     ]
-    }
+}
