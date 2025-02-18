@@ -1,5 +1,5 @@
 const express = require('express');
-const pool = require('../db'); // Ajuste o caminho
+const pool = require('../../db'); // Ajuste o caminho
 const requireAuth = require('../middleware/requireAuth'); // Ajuste o caminho
 
 const router = express.Router();

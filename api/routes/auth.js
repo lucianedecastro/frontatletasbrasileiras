@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const pool = require('../db'); // Ajuste o caminho
+const pool = require('../../db'); // Ajuste o caminho
 
 const router = express.Router();
 
