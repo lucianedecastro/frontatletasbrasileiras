@@ -86,7 +86,7 @@ nav ul li a:hover {
     background-color: #EFF396; /* Amarelo claro */
 }
 
-/* Container de Atletas */
+
 #atletas-container {
     display: flex;
     flex-direction: column;
