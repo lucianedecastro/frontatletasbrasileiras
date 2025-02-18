@@ -2,7 +2,6 @@
   "version": 2,
   "routes": [
     { "src": "/api/(.*)", "dest": "api/index.js" },
-    { "src": "/public/css/public.css", "dest": "/public/css/public.css" },
     { "src": "/(.*)", "dest": "public/$1" }
   ]
 }
